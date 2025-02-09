@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -146,56 +145,6 @@
           document.getElementById('confirmation').innerText = "There was an error submitting the form. Please try again.";
         });
     });
-	<script>
-  function scrollToEnrollment() {
-    let formElement = document.getElementById('enrollmentForm');
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      console.error("Enrollment form element not found");
-    }
-  }
-
-  // Function to get user location and autofill the address field
-  function getUserLocation() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        function(position) {
-          let latitude = position.coords.latitude;
-          let longitude = position.coords.longitude;
-
-          console.log(`User location: Lat ${latitude}, Lon ${longitude}`); // Debugging log
-
-          // Reverse Geocode using OpenStreetMap API
-          let apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`;
-
-          fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-              if (data && data.display_name) {
-                document.getElementById('address').value = data.display_name;
-                console.log("Address autofilled:", data.display_name); // Debugging log
-              } else {
-                console.error("Unable to fetch address. Data:", data);
-              }
-            })
-            .catch(error => console.error("Error fetching address:", error));
-        },
-        function(error) {
-          console.error("Geolocation error:", error.message);
-          alert("Unable to retrieve your location. Please enter your address manually.");
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-      alert("Your browser does not support location services. Please enter your address manually.");
-    }
-  }
-
-  // Ensure function runs after DOM is fully loaded
-  document.addEventListener("DOMContentLoaded", function() {
-    getUserLocation();
-  });
   </script>
 </body>
 </html>
