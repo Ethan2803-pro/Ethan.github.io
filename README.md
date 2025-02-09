@@ -13,14 +13,6 @@
       margin: 0;
       padding: 0;
       background: #f0f8ff;
-      /* Replace the URL below with your own math-themed background if desired */
-      background-image: url('https://example.com/math-background.jpg');
-      background-size: cover;
-      background-position: center;
-      color: #333;
-      position: relative;
-      overflow-x: hidden;
-    }
     /* Header */
     header {
       background: linear-gradient(90deg, #ff7eb3, #ff758c);
