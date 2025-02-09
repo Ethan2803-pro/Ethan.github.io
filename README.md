@@ -138,49 +138,6 @@
       color: red;
       font-size: 16px;
     }
-    /* Decorative Math Elements */
-    .decorations {
-      position: absolute;
-      top: 10%;
-      left: 0;
-      width: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .decorations svg {
-      width: 80px;
-      height: 80px;
-      fill: rgba(255, 183, 207, 0.6);
-    }
-    .circle {
-      position: absolute;
-      top: 20%;
-      left: 5%;
-    }
-    .triangle {
-      position: absolute;
-      bottom: 20%;
-      right: 10%;
-    }
-    .euler {
-      position: absolute;
-      top: 50%;
-      right: 5%;
-      font-size: 2em;
-      color: #ff758c;
-      opacity: 0.7;
-    }
-    .python {
-      position: absolute;
-      bottom: 10%;
-      left: 5%;
-      font-size: 1.5em;
-      color: #306998;
-      background: #fffbf0;
-      padding: 5px 10px;
-      border-radius: 8px;
-      border: 1px solid #306998;
-    }
     /* Modal Styles for Information */
     .modal {
       display: none; /* Hidden by default */
@@ -249,7 +206,6 @@
       // Initialize EmailJS with your User ID
       emailjs.init('OsTI1qjJJAQTrB0wD');
     })();
-    
     // Function to smoothly scroll to the enrollment form
     function scrollToEnrollment() {
       let formElement = document.getElementById('enrollmentForm');
@@ -259,7 +215,6 @@
         console.error("Enrollment form element not found");
       }
     }
-    
     // Function to toggle the display of the Information modal
     function toggleInfo() {
       const modal = document.getElementById("infoModal");
@@ -269,7 +224,6 @@
         modal.style.display = "block";
       }
     }
-    
     // Close modal when clicking outside the modal content
     window.onclick = function(event) {
       const modal = document.getElementById("infoModal");
@@ -277,41 +231,34 @@
         modal.style.display = "none";
       }
     }
-    
     // Form Submission and Validation
     document.getElementById('contact-form').addEventListener('submit', function(event) {
       event.preventDefault();
-
       // Reset previous error messages
       document.getElementById('phoneError').innerText = "";
       document.getElementById('gradeError').innerText = "";
       document.getElementById('addressError').innerText = "";
-      
       let phoneInput = document.getElementById('phone');
       let gradeInput = document.getElementById('grade');
       let addressInput = document.getElementById('address');
-      
       // Validate U.S. phone number (basic check for proper formatting)
       let phonePattern = /^\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4})$/;
       if (!phonePattern.test(phoneInput.value)) {
         document.getElementById('phoneError').innerText = "Please enter a valid U.S. phone number.";
         return;
       }
-
       // Validate Grade Level (must be between 1 and 12)
       let gradeValue = parseInt(gradeInput.value, 10);
       if (isNaN(gradeValue) || gradeValue < 1 || gradeValue > 12) {
         document.getElementById('gradeError').innerText = "Grade must be between 1 and 12.";
         return;
       }
-      
       // Validate Address: Ensure the address includes a Florida location.
       let addressValue = addressInput.value.toLowerCase();
       if (!addressValue.includes("florida") && !addressValue.includes(" fl ")) {
         document.getElementById('addressError').innerText = "Address must be a valid address in Florida.";
         return;
       }
-
       // If all validations pass, send the form data using EmailJS.
       emailjs.sendForm('service_ethan28', 'template_hlib1bs', this)
         .then(function() {
