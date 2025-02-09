@@ -270,23 +270,7 @@
     });
   </script>
 </head>
-<body>
-  <!-- Decorative Math Elements -->
-  <div class="decorations">
-    <div class="circle">
-      <svg viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="40" />
-      </svg>
-    </div>
-    <div class="triangle">
-      <svg viewBox="0 0 100 100">
-        <polygon points="50,15 90,85 10,85" />
-      </svg>
-    </div>
-    <div class="euler">e = 2.71828</div>
-    <div class="python">def math_fun(): return "Python Rocks!"</div>
-  </div>
-  
+<body>  
   <!-- Header Section -->
   <header>
     <h1>Ethan's Math Class</h1>
