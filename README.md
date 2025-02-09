@@ -58,6 +58,7 @@
     input[type="text"],
     input[type="tel"],
     input[type="email"],
+    input[type="number"],
     textarea {
       width: 100%;
       padding: 10px;
@@ -84,11 +85,14 @@
       color: green;
       font-weight: bold;
     }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
   </style>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
     (function() {
-      // Initialize EmailJS with your User ID
       emailjs.init('OsTI1qjJJAQTrB0wD');
     })();
   </script>
@@ -113,6 +117,12 @@
       <div class="form-group">
         <label for="phone">Phone Number</label>
         <input type="tel" id="phone" name="user_phone" required>
+        <span id="phoneError" class="error"></span>
+      </div>
+      <div class="form-group">
+        <label for="grade">Grade Level (1-12)</label>
+        <input type="number" id="grade" name="user_grade" min="1" max="12" required>
+        <span id="gradeError" class="error"></span>
       </div>
       <div class="form-group">
         <label for="address">Address</label>
@@ -135,8 +145,30 @@
     
     document.getElementById('contact-form').addEventListener('submit', function(event) {
       event.preventDefault();
-      
-      // Send form data using EmailJS
+
+      let phoneInput = document.getElementById('phone');
+      let phoneError = document.getElementById('phoneError');
+      let gradeInput = document.getElementById('grade');
+      let gradeError = document.getElementById('gradeError');
+
+      phoneError.innerText = "";
+      gradeError.innerText = "";
+
+      // U.S. phone number validation
+      let phonePattern = /^\(?([2-9][0-8][0-9])\)?[-. ]?([2-9][0-9]{2})[-. ]?([0-9]{4})$/;
+      if (!phonePattern.test(phoneInput.value)) {
+        phoneError.innerText = "Please enter a valid U.S. phone number.";
+        return;
+      }
+
+      // Grade validation (ensure it's between 1 and 12)
+      let gradeValue = parseInt(gradeInput.value, 10);
+      if (gradeValue < 1 || gradeValue > 12 || isNaN(gradeValue)) {
+        gradeError.innerText = "Grade must be between 1 and 12.";
+        return;
+      }
+
+      // Send form data using EmailJS if all validations pass
       emailjs.sendForm('service_ethan28', 'template_hlib1bs', this)
         .then(function() {
           document.getElementById('confirmation').innerText = "Thank you for enrolling! We will contact you soon.";
@@ -148,3 +180,4 @@
   </script>
 </body>
 </html>
+
