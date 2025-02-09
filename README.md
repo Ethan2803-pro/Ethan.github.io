@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -13,6 +12,14 @@
       margin: 0;
       padding: 0;
       background: #f0f8ff;
+      /* Replace the URL below with your own math-themed background if desired */
+      background-image: url('https://example.com/math-background.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #333;
+      position: relative;
+      overflow-x: hidden;
+    }
     /* Header */
     header {
       background: linear-gradient(90deg, #ff7eb3, #ff758c);
@@ -138,6 +145,49 @@
       color: red;
       font-size: 16px;
     }
+    /* Decorative Math Elements */
+    .decorations {
+      position: absolute;
+      top: 10%;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .decorations svg {
+      width: 80px;
+      height: 80px;
+      fill: rgba(255, 183, 207, 0.6);
+    }
+    .circle {
+      position: absolute;
+      top: 20%;
+      left: 5%;
+    }
+    .triangle {
+      position: absolute;
+      bottom: 20%;
+      right: 10%;
+    }
+    .euler {
+      position: absolute;
+      top: 50%;
+      right: 5%;
+      font-size: 2em;
+      color: #ff758c;
+      opacity: 0.7;
+    }
+    .python {
+      position: absolute;
+      bottom: 10%;
+      left: 5%;
+      font-size: 1.5em;
+      color: #306998;
+      background: #fffbf0;
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid #306998;
+    }
     /* Modal Styles for Information */
     .modal {
       display: none; /* Hidden by default */
@@ -205,7 +255,7 @@
     (function() {
       // Initialize EmailJS with your User ID
       emailjs.init('OsTI1qjJJAQTrB0wD');
-    })();
+    })();  
     // Function to smoothly scroll to the enrollment form
     function scrollToEnrollment() {
       let formElement = document.getElementById('enrollmentForm');
@@ -270,7 +320,23 @@
     });
   </script>
 </head>
-<body>  
+<body>
+  <!-- Decorative Math Elements -->
+  <div class="decorations">
+    <div class="circle">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    </div>
+    <div class="triangle">
+      <svg viewBox="0 0 100 100">
+        <polygon points="50,15 90,85 10,85" />
+      </svg>
+    </div>
+    <div class="euler">e = 2.71828</div>
+    <div class="python">def math_fun(): return "Python Rocks!"</div>
+  </div>
+  
   <!-- Header Section -->
   <header>
     <h1>Ethan's Math Class</h1>
@@ -346,5 +412,26 @@
     </form>
     <div id="confirmation"></div>
   </div>
+   <script>
+    function scrollToEnrollment() {
+      let formElement = document.getElementById('enrollmentForm');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.error("Enrollment form element not found");
+      }
+    } 
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();  
+      // Send form data using EmailJS
+      emailjs.sendForm('service_ethan28', 'template_hlib1bs', this)
+        .then(function() {
+          document.getElementById('confirmation').innerText = "Thank you for enrolling! We will contact you soon.";
+        }, function(error) {
+          console.error('Failed to send enrollment information:', error);
+          document.getElementById('confirmation').innerText = "There was an error submitting the form. Please try again.";
+        });
+    });
+	</script>
 </body>
 </html>
